@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 
 import { useTheme } from "./providers/theme-provider";
+import { AppRouter } from "./providers/router-dom-provider";
 
 type AppProps = Record<string, never>;
 
@@ -13,7 +14,7 @@ export const App: FC<AppProps> = () => {
 
   return (
     <div>
-      <h1>App</h1>
+      <AppRouter />
     </div>
   );
 };
