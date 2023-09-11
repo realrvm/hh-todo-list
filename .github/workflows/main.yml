@@ -1,15 +1,15 @@
 name: to-do app linting, testing, building
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 jobs:
   pipeline:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 20.x ]
+        node-version: [20.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,3 +25,6 @@ jobs:
       - name: linting typescript
         if: always()
         run: npm run lint
+      - name: testing
+        if: always()
+        run: npm run test
