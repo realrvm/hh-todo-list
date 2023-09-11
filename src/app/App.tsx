@@ -1,10 +1,15 @@
-import { FC } from "react";
-import { IS_DEV, IS_PROD } from "../shared/lib/constants";
+import { FC, useEffect } from "react";
+
+import { useTheme } from "./providers/theme-provider";
 
 type AppProps = Record<string, never>;
 
 export const App: FC<AppProps> = () => {
-  console.log(IS_DEV, IS_PROD);
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   return (
     <div>

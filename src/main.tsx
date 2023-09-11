@@ -1,10 +1,11 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import "./app/styles/index.scss";
 import { App } from "./app/App";
+import { ThemeProvider } from "./app/providers/theme-provider";
+
+import "./app/styles/index.scss";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <ThemeProvider>
     <App />
-  </React.StrictMode>,
+  </ThemeProvider>,
 );
