@@ -6,9 +6,9 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: ["dist", "eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "i18next"],
   rules: {
     "react-refresh/only-export-components": [
       "warn",
@@ -17,5 +17,17 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "i18next/no-literal-string": [
+      "warn",
+      { markupOnly: true, ignoreAttribute: ["data-testid"] },
+    ],
   },
+  overrides: [
+    {
+      files: ["**/src/**/*.{test,stories}.{.ts,tsx}"],
+      rules: {
+        "i18next/no-literal-string": "off",
+      },
+    },
+  ],
 };

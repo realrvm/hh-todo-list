@@ -1,9 +1,12 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
 
-import { ThemeProvider } from "./app/providers/theme-provider";
+// providers
+import { RouterProvider } from "react-router-dom";
 import { router } from "./app/providers/router-dom-provider";
+import { ThemeProvider } from "./app/providers/theme-provider";
 import { StoreProvider } from "./app/providers/rtk-provider";
+
+import "@/shared/configs/i18n/";
 
 import "./app/styles/index.scss";
 
