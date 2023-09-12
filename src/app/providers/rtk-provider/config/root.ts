@@ -2,8 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { createReducerManager } from "./reducerManager";
 import { reducers } from "./reducers";
-import { StateSchema, StoreWithManager } from "../types";
 import { IS_DEV } from "@/shared/lib/constants";
+
+import type { StateSchema, StoreWithManager } from "./StateSchema";
 
 const reducer = createReducerManager(reducers);
 
