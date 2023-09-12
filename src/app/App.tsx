@@ -3,6 +3,7 @@ import { FC, useEffect } from "react";
 import { useTheme } from "./providers/theme-provider";
 import { AppRouter } from "./providers/router-dom-provider";
 import { Navbar } from "@/widgets/navbar";
+import { Sidebar } from "@/widgets/sidebar";
 
 type AppProps = Record<string, never>;
 
@@ -14,9 +15,12 @@ export const App: FC<AppProps> = () => {
   }, [theme]);
 
   return (
-    <div>
+    <div className="app-wrapper">
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <AppRouter />
+      <div className="app-container">
+        <Sidebar />
+        <AppRouter />
+      </div>
     </div>
   );
 };

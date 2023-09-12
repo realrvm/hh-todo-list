@@ -1,0 +1,7 @@
+.app-wrapper {
+  min-height: 100vh;
+}
+
+.app-container {
+  @include flex-sb;
+}

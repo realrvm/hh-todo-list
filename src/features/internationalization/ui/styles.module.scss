@@ -1,0 +1,17 @@
+.LangSwitcher {
+  width: 92%;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-top: 1px solid var(--accent-color);
+}
+
+.langButton {
+  font-size: 20px;
+  padding: 2px 5px;
+  color: var(--text-color-constant);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
