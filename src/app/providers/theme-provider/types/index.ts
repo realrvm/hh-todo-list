@@ -1,6 +1,6 @@
 export const enum Themes {
-  LIGHT = "light_theme",
-  DARK = "dark_theme",
+  LIGHT = "app_light_theme",
+  DARK = "app_dark_theme",
 }
 
 export type ThemesContextType = {

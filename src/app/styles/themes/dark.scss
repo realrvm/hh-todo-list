@@ -1,4 +1,9 @@
-.dark_theme {
+.app_dark_theme {
+  /* Common */
   --bg-color: #5c5470;
-  --text-color: #faf0e6;
+  --text-color-primary: #faf0e6;
+  --text-color-secondary: #b9b4c7;
+
+  /* NavBar */
+  --nav-bg-color: #352f44;
 }

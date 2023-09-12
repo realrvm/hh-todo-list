@@ -1,17 +1,11 @@
-import { FC } from 'react';
+import { FC } from "react";
 
-import styles from './styles.module.scss';
+import styles from "./styles.module.scss";
 
-type TasksListProps = {
-  className?: string;
+type TasksListProps = Record<string, never>;
+
+const TasksList: FC<TasksListProps> = () => {
+  return <div className={`${styles.tasksList}`}>TasksList</div>;
 };
-
-const TasksList:FC<TasksListProps> = ({ className }) => {
-  return (
-    <div className={`${styles.tasksList} ${className}`}>
-      TasksList
-    </div>
-  )
-}
 
 export default TasksList;

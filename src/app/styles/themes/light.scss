@@ -1,4 +1,9 @@
-.light_theme {
+.app_light_theme {
+  /* Common */
   --bg-color: #ffd;
-  --text-color: #333;
+  --text-color-primary: #333;
+  --text-color-secondary: #828282;
+
+  /* NavBar */
+  --nav-bg-color: #f2994a;
 }

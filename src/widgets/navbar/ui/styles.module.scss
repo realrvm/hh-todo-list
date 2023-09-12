@@ -1,0 +1,38 @@
+.Navbar {
+  height: var(--nav-height-desktop);
+  background-color: var(--nav-bg-color);
+
+  @media (max-width: 1024px) {
+    height: var(--nav-height-mobile);
+  }
+}
+
+.navContainer {
+  @include flex-sb;
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.navTitle {
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1.3;
+  margin-left: 5px;
+  color: var(--nav-title-color);
+  text-shadow: 3px 5px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1024px) {
+    font-size: var(--font-size-l);
+  }
+
+  @media (max-width: 400px) {
+    display: none;
+  }
+}
+
+.navHamburger,
+.navActions {
+  @include flex;
+}

@@ -1,4 +1,5 @@
 :root {
+  /* TYPOGRAPHY */
   --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-size-m: 16px;
   --font-line-m: 24px;
@@ -9,4 +10,12 @@
   --font-size-xl: 32px;
   --font-line-xl: 40px;
   --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family);
+
+  /* SIZES */
+  --nav-height-desktop: 75px;
+  --nav-height-mobile: 40px;
+
+  /* COLORS */
+  --nav-title-color: #f2f2f2;
+  --hover-color: #daded1;
 }
