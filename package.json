@@ -47,6 +47,7 @@
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "babel-jest": "^29.6.4",
+    "babel-plugin-transform-vite-meta-env": "^1.0.3",
     "eslint": "^8.45.0",
     "eslint-plugin-i18next": "^6.0.3",
     "eslint-plugin-react-hooks": "^4.6.0",

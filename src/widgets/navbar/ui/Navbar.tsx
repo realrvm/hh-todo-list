@@ -10,6 +10,7 @@ import { DarkTheme, LightTheme } from "@/shared/assets/icons";
 import { hrActions } from "../model/slice/hrSlice";
 import { useActionCreators } from "@/app/providers/rtk-provider";
 import { ActionButton } from "./action-button/ActionButton";
+import { AppLink } from "@/shared/ui/app-link";
 
 import styles from "./styles.module.scss";
 
@@ -35,7 +36,9 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
               onToggle={() => hrAction.toggle()}
             />
           ) : null}
-          <h1 className={styles.navTitle}>{t("title")}</h1>
+          <AppLink to="/">
+            <h1 className={styles.navTitle}>{t("title")}</h1>
+          </AppLink>
         </div>
         <div className={styles.navActions}>
           <ActionButton handleClick={toggleTheme}>
