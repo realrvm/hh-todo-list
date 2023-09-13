@@ -15,7 +15,7 @@ export const App: FC<AppProps> = () => {
   }, [theme]);
 
   return (
-    <div className="app-wrapper">
+    <div className="app-wrapper app">
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <div className="app-container">
         <Sidebar />

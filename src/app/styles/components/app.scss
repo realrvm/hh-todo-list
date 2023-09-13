@@ -5,3 +5,10 @@
 .app-container {
   @include flex-sb;
 }
+
+.app.app_light_theme, .app.app_dark_theme {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+}
