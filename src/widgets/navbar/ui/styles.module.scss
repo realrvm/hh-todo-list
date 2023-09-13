@@ -42,3 +42,24 @@
 .navActions {
   @include flex;
 }
+
+.navActions {
+  @include flex;
+
+  button:not(first-child) {
+    margin-left: 20px;
+  }
+}
+
+.navBtnTasks {
+  & svg {
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 1024px) {
+    & svg {
+      transform: translateX(1px);
+      transform: translateY(0px);
+    }
+  }
+}

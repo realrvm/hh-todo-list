@@ -8,3 +8,6 @@ export const LOCAL_STORAGE_THEME_KEY = "theme";
 // sizes
 export const TABLET_PAGE_WIDTH = 1024;
 export const DESKTOP_PAGE_WIDTH = 1440;
+
+// animations
+export const ANIMATION_DELAY = 300;

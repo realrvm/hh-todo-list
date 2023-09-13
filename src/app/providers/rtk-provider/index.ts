@@ -1,4 +1,8 @@
-export type { StateSchema } from "./config/StateSchema";
+export type {
+  StateSchema,
+  StateSchemaKeys,
+  StoreWithManager,
+} from "./config/StateSchema";
 
 export { useStateSelector, useAppDispatch, useActionCreators } from "./hooks";
 

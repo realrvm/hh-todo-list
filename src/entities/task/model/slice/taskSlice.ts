@@ -3,6 +3,12 @@ import { TaskSchema } from "../types";
 
 const initialState: TaskSchema = {
   id: "",
+  title: "",
+  priority: "",
+  deadline: "",
+  description: "",
+  label: "",
+  completed: false,
 };
 
 const taskSlice = createSlice({
