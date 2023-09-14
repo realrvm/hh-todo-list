@@ -1,0 +1,41 @@
+.tmLabelWrap {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  min-width: 290px;
+  border-radius: 5px;
+
+  span {
+    margin-left: 30px;
+    color: var(--text-color-constant);
+
+    @media (max-width: 1024px) {
+      margin-left: 15px;
+      font-size: 12px;
+    }
+  }
+}
+
+.tmLabelInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-left: 20px;
+
+  input[type="color"] {
+    padding: 0;
+    border: 0;
+    min-width: 50px;
+    min-height: 50px;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    margin-left: 15px;
+  }
+}

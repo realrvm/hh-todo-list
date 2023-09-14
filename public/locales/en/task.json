@@ -1,0 +1,15 @@
+{
+  "edit-task": "Edit task",
+  "add-task": "Add task",
+  "title": "Title",
+  "deadline": "Deadline",
+  "priority": "Priority",
+  "label": "Label",
+  "description": "Description",
+  "high": "High",
+  "medium": "Medium",
+  "low": "Low",
+  "add": "Add",
+  "change": "Change",
+  "clear": "Clear"
+}

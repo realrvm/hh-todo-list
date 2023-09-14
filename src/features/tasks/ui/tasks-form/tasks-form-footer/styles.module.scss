@@ -1,0 +1,52 @@
+.tmFooter {
+  @include flex;
+  height: 70px;
+  font-size: 14px;
+  font-weight: 400;
+  border-top: 1px solid var(--border-footer-modal-color);
+
+  a {
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  svg {
+    cursor: pointer;
+  }
+
+  button:first-child {
+    border: none;
+    margin-right: 20px;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: inherit;
+    }
+  }
+
+  button:last-child {
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.05);
+      background-color: inherit;
+    }
+  }
+
+  button {
+    min-width: 75px;
+    height: 30px;
+    background-color: inherit;
+    border: 1px solid var(--text-color-secondary);
+    border-radius: 5px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-top: 10px;
+    height: 40px;
+  }
+}

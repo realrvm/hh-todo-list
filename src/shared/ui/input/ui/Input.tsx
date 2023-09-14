@@ -4,8 +4,8 @@ import styles from "./styles.module.scss";
 import { cn } from "@/shared/lib/cn/classnames";
 
 type InputProps = {
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   label?: string;
   element?: string;
@@ -28,7 +28,6 @@ export const Input: FC<InputProps> = (props) => {
       {element === "input" && (
         <input type={type} value={value} onChange={onChange} {...other} />
       )}
-      {element === "select" && <select />}
       {element === "textarea" && <textarea />}
     </div>
   );

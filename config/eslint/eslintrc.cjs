@@ -10,6 +10,10 @@ module.exports = {
   ignorePatterns: ["dist", "eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh", "i18next"],
+  parserOptions: {
+    sourceType: "module",
+    ecmaVersion: 6,
+  },
   rules: {
     "react-refresh/only-export-components": [
       "warn",

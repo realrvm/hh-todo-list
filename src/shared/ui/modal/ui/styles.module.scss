@@ -17,9 +17,13 @@
 
 .content {
   background-color: var(--bg-color);
-  border-radius: 10px;
+  border-radius: 20px;
   transition: transform 0.3s;
   transform: scale(0.5);
+
+  @media (max-width: 1024px) {
+    border-radius: 5px;
+  }
 }
 
 .opened {

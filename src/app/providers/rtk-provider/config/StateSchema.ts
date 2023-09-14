@@ -8,8 +8,10 @@ import { TasksModalSchema } from "@/features/tasks";
 
 export type StateSchema = {
   hr: HRSchema;
-  task: TaskSchema;
   tasksModal: TasksModalSchema;
+
+  // async
+  task?: TaskSchema;
 };
 
 export type StateSchemaKeys = keyof StateSchema;

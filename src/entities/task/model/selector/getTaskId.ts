@@ -1,6 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit";
-
-import { TaskSchema } from "../types";
 import { getTask } from "./getTask";
+import { StateSchema } from "@/app/providers/rtk-provider";
 
-export const getTaskId = createSelector(getTask, (task: TaskSchema) => task.id);
+export const getTaskId = (state: StateSchema) => getTask(state)?.id;
