@@ -1,4 +1,13 @@
-import { ChangeEvent, FC, useCallback, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  FormEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@/shared/ui/text";
 import { Button, ButtonThemes } from "@/shared/ui/button";
@@ -10,9 +19,29 @@ import { TasksFormLabel } from "./tasks-form-label/TasksFormLabel";
 import { TasksFormDescription } from "./tasks-form-desciption/TasksFormDescription";
 import { TasksFormDeadline } from "./tasks-form-deadline/TasksFormDeadline";
 import { TasksFormPriority } from "./tasks-form-priority/TasksFormPriority";
-import { useTranslation } from "react-i18next";
+import { createId } from "@/shared/lib/helpers/createId";
+import { useActionCreators } from "@/app/providers/rtk-provider";
 
+import { taskActions, type TaskSchema } from "@/entities/task";
+
+import { BLACK_COLOR } from "@/shared/lib/constants";
 import styles from "./styles.module.scss";
+
+type FormTarget = {
+  title: { value: string };
+  priority: { value: string };
+  deadline: { value: string };
+  description: { value: string };
+  label: { value: string };
+} & EventTarget;
+
+type FormCurrent = {
+  title: { value: string };
+  priority: { value: string };
+  deadline: { value: string };
+  description: { value: string };
+  label: { value: string };
+} & HTMLFormElement;
 
 type TasksFormProps = {
   closeTasksModal: () => void;
@@ -20,10 +49,15 @@ type TasksFormProps = {
 
 export const TasksForm: FC<TasksFormProps> = ({ closeTasksModal }) => {
   const [deadlineDate, setDeadlineDate] = useState<Date>(new Date());
-  const [labelColor, setLabelColor] = useState("#000000");
-  const { t } = useTranslation("task");
+  const [labelColor, setLabelColor] = useState(BLACK_COLOR);
 
-  const task_id = "1";
+  const { t } = useTranslation("task");
+  const taskAction = useActionCreators(taskActions);
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const taskId = "";
+  const isCompleted = false;
 
   const deadlineHandler = useCallback((date: Date) => {
     setDeadlineDate(date);
@@ -38,19 +72,55 @@ export const TasksForm: FC<TasksFormProps> = ({ closeTasksModal }) => {
     [],
   );
 
-  const removeTask = () => {};
+  useEffect(() => {
+    const form = formRef.current as FormCurrent;
 
-  const clearModal = () => {};
+    if (taskId.length && form) {
+      form.title.value = "11";
+      form.priority.value = "low";
+      form.deadline.value = new Date().toISOString();
+      form.description.value = "2222";
+      form.label.value = "#639";
+    }
+  }, [formRef, taskId]);
+
+  const submitHandler: FormEventHandler = (e) => {
+    e.preventDefault();
+    const target = e.target as FormTarget;
+
+    const task: TaskSchema = {
+      id: taskId || createId(),
+      title: target.title.value,
+      priority: target.priority.value,
+      deadline: target.deadline.value,
+      description: target.description.value,
+      label: target.label.value,
+      completed: isCompleted,
+    };
+
+    taskAction.addTask(task);
+    closeTasksModal();
+  };
+
+  const removeTask = useCallback(() => {
+    taskAction.removeTask(taskId);
+  }, [taskId, taskAction]);
+
+  const clearModal = useCallback(() => {
+    setDeadlineDate(new Date());
+    setLabelColor(BLACK_COLOR);
+    formRef.current?.reset();
+  }, [formRef]);
 
   return (
     <div className={styles.tmWrapper}>
       <div className={styles.tmHeader}>
-        <Text>{task_id ? t("edit-task") : t("add-task")}</Text>
+        <Text>{taskId ? t("edit-task") : t("add-task")}</Text>
         <Button theme={ButtonThemes.CLEAR} onClick={closeTasksModal}>
           <Cross />
         </Button>
       </div>
-      <form className={styles.tmForm}>
+      <form ref={formRef} className={styles.tmForm} onSubmit={submitHandler}>
         <div className={styles.tmBody}>
           <TasksFormTitle className={styles.tmTitle} />
           <TasksFormDeadline
@@ -69,7 +139,7 @@ export const TasksForm: FC<TasksFormProps> = ({ closeTasksModal }) => {
         <TasksFormFooter
           removeTask={removeTask}
           clearModal={clearModal}
-          task_id={task_id}
+          taskId={taskId}
         />
       </form>
     </div>

@@ -11,7 +11,7 @@ export type StateSchema = {
   tasksModal: TasksModalSchema;
 
   // async
-  task?: TaskSchema;
+  task?: TaskSchema[];
 };
 
 export type StateSchemaKeys = keyof StateSchema;

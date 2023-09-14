@@ -18,3 +18,6 @@ export const LARGE_INDENT = 53;
 
 // animations
 export const ANIMATION_DELAY = 300;
+
+// colors
+export const BLACK_COLOR = "#000";

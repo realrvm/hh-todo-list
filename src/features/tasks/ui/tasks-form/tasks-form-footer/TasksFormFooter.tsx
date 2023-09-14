@@ -11,22 +11,22 @@ import styles from "./styles.module.scss";
 type TasksFormFooterProps = {
   removeTask: () => void;
   clearModal: () => void;
-  task_id: string;
+  taskId: string;
 };
 
 export const TasksFormFooter: FC<TasksFormFooterProps> = ({
   removeTask,
   clearModal,
-  task_id,
+  taskId,
 }) => {
   const { t } = useTranslation("task");
 
   return (
     <div
       className={styles.tmFooter}
-      style={{ justifyContent: task_id ? "space-between" : "flex-end" }}
+      style={{ justifyContent: taskId ? "space-between" : "flex-end" }}
     >
-      {task_id ? (
+      {taskId ? (
         <AppLink onClick={removeTask} to={"/"}>
           <TrashDelete />
         </AppLink>
@@ -35,7 +35,7 @@ export const TasksFormFooter: FC<TasksFormFooterProps> = ({
         <Button onClick={clearModal} theme={ButtonThemes.CLEAR}>
           {t("clear")}
         </Button>
-        <Button type="submit">{task_id ? t("change") : t("add")}</Button>
+        <Button type="submit">{taskId ? t("change") : t("add")}</Button>
       </div>
     </div>
   );
