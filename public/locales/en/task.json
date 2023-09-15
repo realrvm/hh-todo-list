@@ -11,5 +11,11 @@
   "low": "Low",
   "add": "Add",
   "change": "Change",
-  "clear": "Clear"
+  "clear": "Clear",
+  "new": "New",
+  "done": "Done",
+  "remove": "Remove",
+  "edit": "Edit",
+  "status": "Status",
+  "not-found":"Task not found"
 }

@@ -20,12 +20,16 @@ import { TasksFormDescription } from "./tasks-form-desciption/TasksFormDescripti
 import { TasksFormDeadline } from "./tasks-form-deadline/TasksFormDeadline";
 import { TasksFormPriority } from "./tasks-form-priority/TasksFormPriority";
 import { createId } from "@/shared/lib/helpers/createId";
-import { useActionCreators } from "@/app/providers/rtk-provider";
+import {
+  useActionCreators,
+  useStateSelector,
+} from "@/app/providers/rtk-provider";
 
 import { taskActions, type TaskSchema } from "@/entities/task";
 
 import { BLACK_COLOR } from "@/shared/lib/constants";
 import styles from "./styles.module.scss";
+import { getTaskDetails } from "@/pages/task-details";
 
 type FormTarget = {
   title: { value: string };
@@ -50,13 +54,14 @@ type TasksFormProps = {
 export const TasksForm: FC<TasksFormProps> = ({ closeTasksModal }) => {
   const [deadlineDate, setDeadlineDate] = useState<Date>(new Date());
   const [labelColor, setLabelColor] = useState(BLACK_COLOR);
+  const taskDetails = useStateSelector(getTaskDetails);
 
   const { t } = useTranslation("task");
   const taskAction = useActionCreators(taskActions);
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const taskId = "";
+  const taskId = taskDetails?.id || "";
   const isCompleted = false;
 
   const deadlineHandler = useCallback((date: Date) => {
@@ -76,13 +81,21 @@ export const TasksForm: FC<TasksFormProps> = ({ closeTasksModal }) => {
     const form = formRef.current as FormCurrent;
 
     if (taskId.length && form) {
-      form.title.value = "11";
-      form.priority.value = "low";
-      form.deadline.value = new Date().toISOString();
-      form.description.value = "2222";
-      form.label.value = "#639";
+      form.title.value = taskDetails?.title || "";
+      form.priority.value = taskDetails?.priority || "high";
+      form.deadline.value = taskDetails?.deadline || new Date().toISOString();
+      form.description.value = taskDetails?.description || "";
+      form.label.value = taskDetails?.label || BLACK_COLOR;
     }
-  }, [formRef, taskId]);
+  }, [
+    formRef,
+    taskId,
+    taskDetails?.title,
+    taskDetails?.priority,
+    taskDetails?.deadline,
+    taskDetails?.description,
+    taskDetails?.label,
+  ]);
 
   const submitHandler: FormEventHandler = (e) => {
     e.preventDefault();
@@ -104,7 +117,8 @@ export const TasksForm: FC<TasksFormProps> = ({ closeTasksModal }) => {
 
   const removeTask = useCallback(() => {
     taskAction.removeTask(taskId);
-  }, [taskId, taskAction]);
+    closeTasksModal();
+  }, [taskId, taskAction, closeTasksModal]);
 
   const clearModal = useCallback(() => {
     setDeadlineDate(new Date());

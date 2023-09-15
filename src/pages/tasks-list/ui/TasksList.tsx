@@ -7,19 +7,11 @@ import { Text } from "@/shared/ui/text";
 
 import { Task } from "@/entities/task/ui/Task";
 import { useStateSelector } from "@/app/providers/rtk-provider";
-import { type TaskSchema, getTasks, taskReducer } from "@/entities/task";
-import {
-  ModuleLoader,
-  ReducersList,
-} from "@/shared/lib/components/ModuleLoader";
+import { type TaskSchema, getTasks } from "@/entities/task";
 
 import styles from "./styles.module.scss";
 
 type TasksListProps = Record<string, never>;
-
-const intialReducers: ReducersList = {
-  task: taskReducer,
-};
 
 const TasksList: FC<TasksListProps> = () => {
   const tasksList = useStateSelector(getTasks) as TaskSchema[];
@@ -39,9 +31,7 @@ const TasksList: FC<TasksListProps> = () => {
           </Text>
         ))}
       </div>
-      <ModuleLoader reducers={intialReducers}>
-        {tasksList?.map((task) => <Task key={task.id} task={task} />)}
-      </ModuleLoader>
+      {tasksList?.map((task) => <Task key={task.id} task={task} />)}
     </Container>
   );
 };

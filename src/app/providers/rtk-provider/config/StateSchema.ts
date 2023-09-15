@@ -12,6 +12,7 @@ export type StateSchema = {
 
   // async
   task?: TaskSchema[];
+  taskDetails?: TaskSchema;
 };
 
 export type StateSchemaKeys = keyof StateSchema;

@@ -19,6 +19,7 @@ import { AppLink } from "@/shared/ui/app-link";
 import { tasksModalActions } from "@/features/tasks";
 
 import styles from "./styles.module.scss";
+import { taskDetailsActions } from "@/pages/task-details";
 
 type NavbarProps = {
   toggleTheme: () => void;
@@ -32,10 +33,12 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
   const hrAction = useActionCreators(hrActions);
 
   const tasksModal = useActionCreators(tasksModalActions);
+  const taskDetails = useActionCreators(taskDetailsActions);
 
   const openTasksModal = useCallback(() => {
+    taskDetails.reset();
     tasksModal.open();
-  }, [tasksModal]);
+  }, [tasksModal, taskDetails]);
 
   return (
     <div className={styles.Navbar}>

@@ -21,7 +21,8 @@ import type { TaskSchema } from "../model/types";
 
 import styles from "./styles.module.scss";
 import { useActionCreators } from "@/app/providers/rtk-provider";
-import { taskActions } from "../model/slice/taskSlice";
+import { tasksModalActions } from "@/features/tasks";
+import { taskDetailsActions } from "@/pages/task-details";
 
 type TaskProps = {
   task: TaskSchema;
@@ -30,7 +31,8 @@ type TaskProps = {
 export const Task: FC<TaskProps> = ({ task }) => {
   const { width } = useWindowWidth();
   const priorities = usePriorities();
-  const action = useActionCreators(taskActions);
+  const taskAction = useActionCreators(taskDetailsActions);
+  const taskModalAction = useActionCreators(tasksModalActions);
 
   const { id, title, description, deadline, priority, label, completed } = task;
   const isDesktop = width >= TABLET_PAGE_WIDTH;
@@ -38,12 +40,17 @@ export const Task: FC<TaskProps> = ({ task }) => {
   const [date, time] = convertDateFormat(deadline);
 
   const editTask = useCallback(() => {
-    action.addTask(task);
-  }, [action, task]);
+    taskAction.setTaskDetails(task);
+    taskModalAction.open();
+  }, [taskAction, taskModalAction, task]);
+
+  const showTask = useCallback(() => {
+    taskAction.setTaskDetails(task);
+  }, [taskAction, task]);
 
   return (
     <div className={styles.taskWrap}>
-      <AppLink to={`/${id}`} className={styles.taskTitle}>
+      <AppLink to={`/${id}`} className={styles.taskTitle} onClick={showTask}>
         <div className={styles.taskTitleIcon}>
           {completed ? (
             isDesktop ? (
