@@ -1,3 +1,28 @@
 .tasksList {
-  position: relative;
+  display: grid;
+  height: 81px;
+  width: 96%;
+  border-bottom: 1px solid var(--accent-color);
+  grid-template-columns: 3fr 1fr 1fr minmax(20px, 3%);
+
+  span:nth-child(1) {
+    margin-left: 5%;
+  }
+
+  @media (max-width: 1024px) {
+    height: 37px;
+  }
+}
+
+.tasksListHeader {
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  font-size: 18px;
+  margin-top: 20px;
+
+  @media (max-width: 1024px) {
+    font-size: 12px;
+    margin-top: 0;
+  }
 }

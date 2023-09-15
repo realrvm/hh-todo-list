@@ -3,10 +3,12 @@
 }
 
 .app-container {
-  @include flex-sb;
+  display: flex;
+  justify-content: space-between;
 }
 
-.app.app_light_theme, .app.app_dark_theme {
+.app.app_light_theme,
+.app.app_dark_theme {
   width: 100vw;
   height: 100vh;
   background-color: var(--bg-color);

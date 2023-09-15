@@ -9,16 +9,7 @@ import { getTasksModalVisibility } from "../model/selector/getTasksModalVisibili
 import { tasksModalActions } from "../model/slice/tasksModalSlice";
 
 import styles from "./styles.module.scss";
-import {
-  ModuleLoader,
-  ReducersList,
-} from "@/shared/lib/components/ModuleLoader";
-import { taskReducer } from "@/entities/task";
 import { TasksForm } from "./tasks-form/TasksForm";
-
-const initialReducers: ReducersList = {
-  task: taskReducer,
-};
 
 type TasksModalProps = Record<string, never>;
 
@@ -37,9 +28,7 @@ const TasksModal: FC<TasksModalProps> = () => {
       element="modal"
       className={styles.TasksModal}
     >
-      <ModuleLoader reducers={initialReducers}>
-        <TasksForm closeTasksModal={closeTasksModal} />
-      </ModuleLoader>
+      <TasksForm closeTasksModal={closeTasksModal} />
     </Modal>
   );
 };
