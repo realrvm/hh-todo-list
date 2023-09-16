@@ -1,18 +1,23 @@
-import { memo } from "react";
+import { FC, memo } from "react";
 
+import { cn } from "@/shared/lib/cn/classnames";
 import { IconContainer } from "shared/ui/icon-container";
 import { Svg } from "shared/ui/svg";
 
 import styles from "./styles.module.scss";
 
-export const ArrowLeft = memo(() => {
+type ArrowLeftProps = {
+  className?: string;
+};
+
+export const ArrowLeft: FC<ArrowLeftProps> = memo(({ className }) => {
   return (
     <IconContainer>
       <Svg
         viewBox="0 0 12 21"
         width="12"
         height="21"
-        className={styles.arrowLeft}
+        className={cn(styles.arrowLeft, {}, [className])}
       >
         <path
           fillRule="evenodd"

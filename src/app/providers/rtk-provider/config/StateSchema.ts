@@ -5,10 +5,12 @@ import { createReducerManager } from "./reducerManager";
 import { HRSchema } from "@/widgets/navbar";
 import { TaskSchema } from "@/entities/task";
 import { TasksModalSchema } from "@/features/tasks";
+import { SidebarSchema } from "@/widgets/sidebar";
 
 export type StateSchema = {
   hr: HRSchema;
   tasksModal: TasksModalSchema;
+  sidebar: SidebarSchema;
 
   // async
   task?: TaskSchema[];

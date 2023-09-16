@@ -1,25 +1,20 @@
-import { FC, memo } from "react";
+import { memo } from "react";
 
-import { Exclude } from "./Exclude";
 import { IconContainer } from "shared/ui/icon-container";
 import { Svg } from "shared/ui/svg";
 
 import styles from "./styles.module.scss";
 
-type ExcludeMediumProps = {
-  element?: boolean;
-};
-
-export const ExcludeMedium: FC<ExcludeMediumProps> = memo(({ element }) => {
+export const Ellipse = memo(() => {
   return (
     <IconContainer>
       <Svg
         viewBox="0 0 24 24"
         width="24"
         height="24"
-        className={element ? styles.excludeSB : styles.exclude}
+        className={styles.ellipse}
       >
-        <Exclude />
+        <circle cx="12" cy="12" r="12" />
       </Svg>
     </IconContainer>
   );

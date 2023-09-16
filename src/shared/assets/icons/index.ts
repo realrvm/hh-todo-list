@@ -12,3 +12,4 @@ export { SampleSmall } from "./sample/SampleSmall";
 export { SampleMedium } from "./sample/SampleMedium";
 export { ArrowLeft } from "./arrow-left/ArrowLeft";
 export { TrashBin } from "./trash-bin/TrashBin";
+export { Ellipse } from "./ellipse/Ellipse";

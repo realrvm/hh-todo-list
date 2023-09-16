@@ -1,0 +1,75 @@
+.sbExecList {
+  width: 100%;
+
+  svg {
+    pointer-events: none;
+  }
+
+  span {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+    transform: translateY(2px);
+    pointer-events: none;
+  }
+}
+
+.sbPriority {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sbPriorityTitle {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--accent-color);
+  padding: 30px 0 10px 5px;
+  cursor: pointer;
+
+  span {
+    font-size: 18px;
+    line-height: 21px;
+    margin-left: 8px;
+    color: var(--text-color-constant);
+  }
+}
+
+.sbPriorityListWrap {
+  padding-top: 5px;
+  opacity: 0;
+  transition: opacity 0.5s;
+
+  li {
+    padding: 5px 0 5px 5px;
+  }
+}
+
+.sbPriorityVisible {
+  opacity: 1;
+}
+
+.sbPriorityList {
+  width: 100%;
+  padding-left: 40px;
+
+  span {
+    font-weight: 400;
+    pointer-events: none;
+  }
+}
+
+.arrowRotateRight,
+.arrowRotateDown {
+  transition: transform 0.3s;
+  fill: var(--text-color-constant);
+}
+
+.arrowRotateRight {
+  transform: rotate(180deg);
+}
+
+.arrowRotateDown {
+  transform: rotate(270deg);
+}

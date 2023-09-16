@@ -1,0 +1,16 @@
+.sbListItem {
+  padding-left: 5px;
+  cursor: pointer;
+
+  & span {
+    color: var(--text-color-constant);
+  }
+
+  &+& {
+    margin-top: 3px;
+  }
+}
+
+.sbActiveListItem {
+  background-color: var(--nav-title-color);
+}

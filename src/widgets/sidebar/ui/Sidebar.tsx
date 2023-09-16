@@ -4,6 +4,7 @@ import { LangSwitcher } from "@/features/internationalization/";
 import { getHRToggledValue } from "@/widgets/navbar/";
 import { useStateSelector } from "@/app/providers/rtk-provider";
 import { cn } from "@/shared/lib/cn/classnames";
+import { SidebarTasksList } from "./SidebarTasksList/SidebarTasksList";
 
 import styles from "./styles.module.scss";
 
@@ -15,7 +16,9 @@ export const Sidebar: FC<SidebarProps> = memo(() => {
   return (
     <div className={cn(styles.Sidebar, { [styles.sidebarOpen]: isOpen })}>
       <div className={styles.sbInner}>
-        <div></div>
+        <div className={styles.sbTasksList}>
+          <SidebarTasksList />
+        </div>
         <Suspense fallback={null}>
           <LangSwitcher />
         </Suspense>
