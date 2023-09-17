@@ -5,11 +5,12 @@ import { useSidebar } from "@/shared/lib/hooks/useSidebar";
 import { SidebarTasksItem } from "../SidebarTasksItem/SidebarTasksItem";
 import { Text } from "@/shared/ui/text";
 
-import styles from "./styles.module.scss";
 import { ArrowLeft } from "@/shared/assets/icons";
 import { cn } from "@/shared/lib/cn/classnames";
 import { useActionCreators } from "@/app/providers/rtk-provider";
 import { sidebarActions } from "../../model/slice/sidebarSlice";
+
+import styles from "./styles.module.scss";
 
 type SidebarTasksListProps = Record<string, never>;
 type Ul = HTMLUListElement;
@@ -48,6 +49,7 @@ export const SidebarTasksList: FC<SidebarTasksListProps> = memo(() => {
 
       isExec ? setSortByExecution(itemsList) : setSortByPriority(itemsList);
     }
+
     getByItems(Number(id));
   };
 

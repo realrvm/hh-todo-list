@@ -3,18 +3,16 @@ import { FC, useMemo } from "react";
 import { Container } from "@/shared/ui/container";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@/shared/ui/text";
-
 import { Task } from "@/entities/task/ui/Task";
-import { useStateSelector } from "@/app/providers/rtk-provider";
-import { type TaskSchema, getTasks } from "@/entities/task";
+import { Text } from "@/shared/ui/text";
+import { useGetTaskList } from "@/shared/lib/hooks/useGetTasksList";
 
 import styles from "./styles.module.scss";
 
 type TasksListProps = Record<string, never>;
 
 const TasksList: FC<TasksListProps> = () => {
-  const tasksList = useStateSelector(getTasks) as TaskSchema[];
+  const tasksList = useGetTaskList();
   const { t } = useTranslation("task");
 
   const menuItems = useMemo(
@@ -24,7 +22,7 @@ const TasksList: FC<TasksListProps> = () => {
 
   return (
     <Container>
-      <div className={`${styles.tasksList}`}>
+      <div className={styles.tasksList}>
         {menuItems.map((item) => (
           <Text key={item} className={styles.tasksListHeader}>
             {item}
