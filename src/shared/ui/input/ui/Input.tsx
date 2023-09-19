@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, forwardRef } from "react";
+import { FC, InputHTMLAttributes } from "react";
 
 import styles from "./styles.module.scss";
 import { cn } from "@/shared/lib/cn/classnames";
@@ -8,7 +8,7 @@ type InputProps = {
   label?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export const Input: FC<InputProps> = forwardRef((props) => {
+export const Input: FC<InputProps> = (props) => {
   const { label, className, value, onChange, type = "text", ...other } = props;
 
   return (
@@ -17,4 +17,4 @@ export const Input: FC<InputProps> = forwardRef((props) => {
       <input type={type} value={value} onChange={onChange} {...other} />
     </div>
   );
-});
+};
