@@ -59,6 +59,7 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
           <ActionButton
             handleClick={openTasksModal}
             className={styles.navBtnTasks}
+            dataTestid='nav-modal-open'
           >
             {isMobile ? <PlusSmall /> : <PlusMedium />}
           </ActionButton>
