@@ -6,11 +6,13 @@ import { HRSchema } from "@/widgets/navbar";
 import { TaskSchema } from "@/entities/task";
 import { TasksModalSchema } from "@/features/tasks";
 import { SidebarSchema } from "@/widgets/sidebar";
+import { UserSchema } from "@/entities/user";
 
 export type StateSchema = {
   hr: HRSchema;
   tasksModal: TasksModalSchema;
   sidebar: SidebarSchema;
+  user: UserSchema;
 
   // async
   task?: TaskSchema[];

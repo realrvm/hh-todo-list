@@ -6,9 +6,11 @@ import type { StateSchema } from "./StateSchema";
 import { hrReducer } from "@/widgets/navbar";
 import { tasksModalReducer } from "@/features/tasks";
 import { sidebarReducer } from "@/widgets/sidebar";
+import { userReducer } from "@/entities/user";
 
 export const reducers: ReducersMapObject<StateSchema> = {
   hr: hrReducer,
   tasksModal: tasksModalReducer,
   sidebar: sidebarReducer,
+  user: userReducer,
 };
