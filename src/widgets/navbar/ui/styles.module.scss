@@ -62,3 +62,22 @@
     }
   }
 }
+
+.loginActive,
+.loginInactive {
+  @media (max-width: 1024px) {
+    & svg {
+    transform: translate(-1px, -1px);
+    }
+  }
+}
+
+.loginActive {
+  fill: var(--login-active);
+  stroke: var(--login-active);
+}
+
+.loginInactive {
+  fill: var(--login-inactive);
+  stroke: var(--login-inactive);
+}

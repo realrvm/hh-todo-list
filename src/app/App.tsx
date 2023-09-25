@@ -6,12 +6,15 @@ import { Navbar } from "@/widgets/navbar";
 import { Sidebar } from "@/widgets/sidebar";
 import { TasksModal, getTasksModalVisibility } from "@/features/tasks";
 import { useStateSelector } from "./providers/rtk-provider";
+import { AuthModal } from "@/features/auth";
+import { getAuthModalVisibility } from "@/features/auth/model/selector/getAuthModalVisibility/getAuthModalVisibility";
 
 type AppProps = Record<string, never>;
 
 export const App: FC<AppProps> = () => {
   const { theme, toggleTheme } = useTheme();
   const isOpenTasksModal = useStateSelector(getTasksModalVisibility);
+  const isOpenAuthModal = useStateSelector(getAuthModalVisibility);
 
   useEffect(() => {
     document.body.className = theme;
@@ -25,6 +28,7 @@ export const App: FC<AppProps> = () => {
         <AppRouter />
       </div>
       <Suspense fallback={null}>
+        {isOpenAuthModal ? <AuthModal /> : null}
         {isOpenTasksModal ? <TasksModal /> : null}
       </Suspense>
     </div>

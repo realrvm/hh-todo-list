@@ -13,3 +13,5 @@ export { SampleMedium } from "./ui/sample/SampleMedium";
 export { ArrowLeft } from "./ui/arrow-left/ArrowLeft";
 export { TrashBin } from "./ui/trash-bin/TrashBin";
 export { Ellipse } from "./ui/ellipse/Ellipse";
+export { Login } from "./ui/login/Login";
+export { LoginSmall } from "./ui/login-small/LoginSmall";

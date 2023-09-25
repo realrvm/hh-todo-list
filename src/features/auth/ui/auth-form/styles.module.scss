@@ -1,0 +1,33 @@
+.amWrapper {
+  @include flex;
+  flex-direction: column;
+  padding: 10px 35px;
+
+  @media (max-width: 1024px) {
+    padding: 10px 20px;
+  }
+}
+
+.amHeader {
+  margin-bottom: 20px;
+}
+
+.amForm {
+  @include flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  button {
+    align-self: flex-end;
+    min-width: 75px;
+    height: 30px;
+    background-color: inherit;
+    border: 1px solid var(--text-color-secondary);
+    border-radius: 5px;
+  }
+}
+
+.amInput {
+  width: 100%;
+}

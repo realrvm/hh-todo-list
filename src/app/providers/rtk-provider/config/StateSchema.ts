@@ -7,10 +7,12 @@ import { TaskSchema } from "@/entities/task";
 import { TasksModalSchema } from "@/features/tasks";
 import { SidebarSchema } from "@/widgets/sidebar";
 import { UserSchema } from "@/entities/user";
+import { AuthModalSchema } from "@/features/auth/model/types";
 
 export type StateSchema = {
   hr: HRSchema;
   tasksModal: TasksModalSchema;
+  authModal: AuthModalSchema;
   sidebar: SidebarSchema;
   user: UserSchema;
 

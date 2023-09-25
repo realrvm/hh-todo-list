@@ -9,6 +9,8 @@ import { Themes } from "@/app/providers/theme-provider";
 import {
   DarkTheme,
   LightTheme,
+  Login,
+  LoginSmall,
   PlusMedium,
   PlusSmall,
 } from "@/shared/assets/icons";
@@ -20,6 +22,7 @@ import { tasksModalActions } from "@/features/tasks";
 
 import styles from "./styles.module.scss";
 import { taskDetailsActions } from "@/pages/task-details";
+import { authModalActions } from "@/features/auth";
 
 type NavbarProps = {
   toggleTheme: () => void;
@@ -33,12 +36,17 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
   const hrAction = useActionCreators(hrActions);
 
   const tasksModal = useActionCreators(tasksModalActions);
+  const authModal = useActionCreators(authModalActions);
   const taskDetails = useActionCreators(taskDetailsActions);
 
   const openTasksModal = useCallback(() => {
     taskDetails.reset();
     tasksModal.open();
   }, [tasksModal, taskDetails]);
+
+  const openAuthModal = useCallback(() => {
+    authModal.open();
+  }, [authModal]);
 
   return (
     <div className={styles.Navbar}>
@@ -59,12 +67,19 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
           <ActionButton
             handleClick={openTasksModal}
             className={styles.navBtnTasks}
-            dataTestid='nav-modal-open'
+            dataTestid="nav-modal-open"
           >
             {isMobile ? <PlusSmall /> : <PlusMedium />}
           </ActionButton>
           <ActionButton handleClick={toggleTheme}>
             {theme === Themes.DARK ? <DarkTheme /> : <LightTheme />}
+          </ActionButton>
+          <ActionButton
+            handleClick={openAuthModal}
+            className={styles.loginActive}
+            dataTestid="auth-modal-open"
+          >
+            {isMobile ? <LoginSmall /> : <Login />}
           </ActionButton>
         </div>
       </div>
