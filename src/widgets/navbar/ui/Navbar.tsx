@@ -14,15 +14,22 @@ import {
   PlusMedium,
   PlusSmall,
 } from "@/shared/assets/icons";
+
 import { hrActions } from "../model/slice/hrSlice";
-import { useActionCreators } from "@/app/providers/rtk-provider";
+import {
+  useActionCreators,
+  useStateSelector,
+} from "@/app/providers/rtk-provider";
+
 import { ActionButton } from "./action-button/ActionButton";
 import { AppLink } from "@/shared/ui/app-link";
 import { tasksModalActions } from "@/features/tasks";
 
-import styles from "./styles.module.scss";
 import { taskDetailsActions } from "@/pages/task-details";
 import { authModalActions } from "@/features/auth";
+import { getUserData, userActions } from "@/entities/user";
+
+import styles from "./styles.module.scss";
 
 type NavbarProps = {
   toggleTheme: () => void;
@@ -38,6 +45,13 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
   const tasksModal = useActionCreators(tasksModalActions);
   const authModal = useActionCreators(authModalActions);
   const taskDetails = useActionCreators(taskDetailsActions);
+  const userAction = useActionCreators(userActions);
+
+  const hasUserData = useStateSelector(getUserData);
+
+  const isUserDataActive = hasUserData
+    ? styles.loginActive
+    : styles.loginInactive;
 
   const openTasksModal = useCallback(() => {
     taskDetails.reset();
@@ -47,6 +61,10 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
   const openAuthModal = useCallback(() => {
     authModal.open();
   }, [authModal]);
+
+  const logout = useCallback(() => {
+    userAction.logout();
+  }, [userAction]);
 
   return (
     <div className={styles.Navbar}>
@@ -71,15 +89,19 @@ export const Navbar: FC<NavbarProps> = ({ toggleTheme, theme }) => {
           >
             {isMobile ? <PlusSmall /> : <PlusMedium />}
           </ActionButton>
-          <ActionButton handleClick={toggleTheme}>
-            {theme === Themes.DARK ? <DarkTheme /> : <LightTheme />}
-          </ActionButton>
           <ActionButton
-            handleClick={openAuthModal}
+            handleClick={hasUserData ? logout : openAuthModal}
             className={styles.loginActive}
             dataTestid="auth-modal-open"
           >
-            {isMobile ? <LoginSmall /> : <Login />}
+            {isMobile ? (
+              <LoginSmall className={isUserDataActive} />
+            ) : (
+              <Login className={isUserDataActive} />
+            )}
+          </ActionButton>
+          <ActionButton handleClick={toggleTheme}>
+            {theme === Themes.DARK ? <DarkTheme /> : <LightTheme />}
           </ActionButton>
         </div>
       </div>

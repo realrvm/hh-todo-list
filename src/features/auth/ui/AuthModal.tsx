@@ -7,7 +7,7 @@ import {
   useActionCreators,
   useStateSelector,
 } from "@/app/providers/rtk-provider";
-import { authModalActions } from "..";
+import { authActions, authModalActions } from "..";
 
 import styles from "./styles.module.scss";
 import { getAuthModalVisibility } from "../model/selector/getAuthModalVisibility/getAuthModalVisibility";
@@ -17,10 +17,12 @@ type AuthModalProps = Record<string, never>;
 const AuthModal: FC<AuthModalProps> = () => {
   const isOpenAuthModal = useStateSelector(getAuthModalVisibility);
   const authModal = useActionCreators(authModalActions);
+  const authAction = useActionCreators(authActions);
 
   const closeAuthModal = useCallback(() => {
     authModal.close();
-  }, [authModal]);
+    authAction.setError("");
+  }, [authModal, authAction]);
 
   return (
     <Modal
