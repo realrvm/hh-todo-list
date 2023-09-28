@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect } from "react";
 import { Reducer } from "@reduxjs/toolkit";
-import { useStore } from "react-redux";
+import { useDispatch, useStore } from "react-redux";
 import {
   StateSchema,
   StateSchemaKeys,
@@ -23,11 +23,13 @@ export const ModuleLoader: FC<ModuleLoaderProps> = ({
   isRemoveAfterUnmount = true,
 }) => {
   const store = useStore() as StoreWithManager;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     Object.entries(reducers).forEach((item) => {
       const [name, reducer] = item as ReducerEntry;
       store.reducerManager.add(name, reducer);
+      dispatch({ type: `@INIT ${name} reducer` });
     });
 
     return () => {
@@ -35,10 +37,11 @@ export const ModuleLoader: FC<ModuleLoaderProps> = ({
         Object.entries(reducers).forEach((item) => {
           const [name] = item as ReducerEntry;
           store.reducerManager.remove(name);
+          dispatch({ type: `@DESTROY ${name} reducer` });
         });
       }
     };
-  }, [store.reducerManager, reducers, isRemoveAfterUnmount]);
+  }, [store.reducerManager, reducers, isRemoveAfterUnmount, dispatch]);
 
   return <>{children}</>;
 };
