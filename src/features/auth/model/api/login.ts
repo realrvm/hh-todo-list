@@ -1,21 +1,20 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { LOCAL_STORAGE_AUTH_KEY } from "@/shared/lib/constants";
 import { authModalActions } from "../slice/auth-modal-slice/authModalSlice";
 import { User, userActions } from "@/entities/user";
 import { AuthSchema } from "../types";
+import { ThunkConfig } from "@/app/providers/rtk-provider";
 
 export const login = createAsyncThunk<
   User,
   Pick<AuthSchema, "username" | "password">,
-  { rejectValue: string }
+  ThunkConfig<string>
 >("login/login", async (authData, thunkAPI): Promise<any> => {
+  const { rejectWithValue, dispatch, extra } = thunkAPI;
+
   try {
-    const response = await axios.post<User>(
-      "http://localhost:8000/login",
-      authData
-    );
+    const response = await extra.api.post<User>("/login", authData);
 
     if (!response.data) {
       return thunkAPI.rejectWithValue("Invalid username or password");
@@ -26,13 +25,13 @@ export const login = createAsyncThunk<
       JSON.stringify(response.data)
     );
 
-    thunkAPI.dispatch(authModalActions.close());
-    thunkAPI.dispatch(userActions.setUserData(response.data));
+    dispatch(authModalActions.close());
+    dispatch(userActions.setUserData(response.data));
 
     return response.data;
   } catch (error) {
     if (error instanceof Error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 });

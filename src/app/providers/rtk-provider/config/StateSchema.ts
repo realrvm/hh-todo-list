@@ -8,6 +8,7 @@ import { TasksModalSchema } from "@/features/tasks";
 import { SidebarSchema } from "@/widgets/sidebar";
 import { UserSchema } from "@/entities/user";
 import { AuthModalSchema, AuthSchema } from "@/features/auth/model/types";
+import { AxiosInstance } from "axios";
 
 export type StateSchema = {
   hr: HRSchema;
@@ -26,6 +27,15 @@ export type StateSchemaKeys = keyof StateSchema;
 
 type ReducerManager = ReturnType<typeof createReducerManager>;
 
-export interface StoreWithManager extends EnhancedStore<StateSchema> {
+export type StoreWithManager = {
   reducerManager: ReducerManager;
-}
+} & EnhancedStore<StateSchema>;
+
+export type ThunkExtraArgs = {
+  api: AxiosInstance;
+};
+
+export type ThunkConfig<T> = {
+  rejectValue: T;
+  extra: ThunkExtraArgs;
+};
