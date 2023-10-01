@@ -34,6 +34,6 @@ describe("login", () => {
     expect(thunk.dispatch).toHaveBeenCalledTimes(2);
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe("rejected");
-    expect(result.payload).toBe("Invalid username or password");
+    expect(result.payload).toEqual(["no data"]);
   });
 });

@@ -1,23 +1,36 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { LOCAL_STORAGE_AUTH_KEY } from "@/shared/lib/constants";
-import { authModalActions } from "../slice/auth-modal-slice/authModalSlice";
 import { User, userActions } from "@/entities/user";
-import { AuthSchema } from "../types";
 import { ThunkConfig } from "@/app/providers/rtk-provider";
+import { authModalActions } from "../../slice/auth-modal-slice/authModalSlice";
+import { AuthSchema, AuthValidateErrors } from "../../types";
+import { validate } from "../validate/validate";
+
+const serverErrorMessages: Record<string, AuthValidateErrors[]> = {
+  "Network Error": [AuthValidateErrors.SERVER_ERROR],
+  "Request failed with status code 403": [AuthValidateErrors.NO_USER_FOUND],
+};
 
 export const login = createAsyncThunk<
   User,
   Pick<AuthSchema, "username" | "password">,
-  ThunkConfig<string>
+  ThunkConfig<AuthValidateErrors[]>
 >("login/login", async (authData, thunkAPI): Promise<any> => {
   const { rejectWithValue, dispatch, extra } = thunkAPI;
 
+  const errors = validate(authData);
+
+  if (errors.length) {
+    return rejectWithValue([AuthValidateErrors.INCORRECT_USER_DATA]);
+  }
+
   try {
     const response = await extra.api.post<User>("/login", authData);
+    console.log(response);
 
     if (!response.data) {
-      return thunkAPI.rejectWithValue("Invalid username or password");
+      return rejectWithValue([AuthValidateErrors.NO_DATA]);
     }
 
     window.localStorage.setItem(
@@ -31,7 +44,8 @@ export const login = createAsyncThunk<
     return response.data;
   } catch (error) {
     if (error instanceof Error) {
-      return rejectWithValue(error.message);
+      const { message } = error;
+      return rejectWithValue(serverErrorMessages[message]);
     }
   }
 });

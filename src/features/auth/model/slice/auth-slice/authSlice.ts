@@ -1,13 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { AuthSchema } from "../../types";
-import { login } from "../../api/login";
+import { login } from "../../api/login/login";
 
 const initialState: AuthSchema = {
   isLoading: false,
   username: "",
   password: "",
   error: "",
+  validate: undefined,
 };
 
 const authSlice = createSlice({
@@ -20,22 +21,23 @@ const authSlice = createSlice({
     setPassword: (state, action: PayloadAction<string>) => {
       state.password = action.payload;
     },
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
+    setError: (state) => {
+      state.validate = undefined ;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.error = undefined;
+        state.validate = undefined;
         state.isLoading = true;
       })
       .addCase(login.fulfilled, (state) => {
         state.isLoading = false;
+        state.validate = undefined;
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.validate = action.payload;
       });
   },
 });

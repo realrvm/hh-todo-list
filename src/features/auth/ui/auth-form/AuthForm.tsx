@@ -1,23 +1,23 @@
-import { FC, FormEventHandler, useEffect, useRef } from "react";
+import { FC, FormEventHandler, useEffect, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 
-import { useTranslation } from "react-i18next";
 import { AuthSchema } from "../../model/types";
 import {
   useActionCreators,
   useAppDispatch,
   useStateSelector,
 } from "@/app/providers/rtk-provider";
-import { login } from "../../model/api/login";
 import { authActions } from "../..";
+import { login } from "../../model/api/login/login";
 
 import { getAuthIsLoading } from "../../model/selector/getAuthIsLoading/getAuthIsLoading";
-import { getAuthError } from "../../model/selector/getAuthError/getAuthError";
 import { Text, TextThemes } from "@/shared/ui/text";
 
 import styles from "./styles.module.scss";
+import { getAuthValidateErrors } from "../../model/selector/getAuthValidateErrors/getAuthValidateErrors";
 
 type FormTarget = {
   username: { value: string };
@@ -32,7 +32,17 @@ export const AuthForm: FC<AuthFormProps> = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const isLoading = useStateSelector(getAuthIsLoading);
-  const error = useStateSelector(getAuthError);
+  const errors = useStateSelector(getAuthValidateErrors);
+
+  const authErrors = useMemo(
+    () => ({
+      "incorrect user data": t("incorrect user data"),
+      "no user found": t("no user found"),
+      "no data": t("no data"),
+      "server error": t("server error"),
+    }),
+    [t]
+  );
 
   const loginDispatch = useAppDispatch();
   const authAction = useActionCreators(authActions);
@@ -57,12 +67,13 @@ export const AuthForm: FC<AuthFormProps> = () => {
 
     authAction.setUsername("");
     authAction.setPassword("");
+    authAction.setError();
   };
 
-  const isError = error ? (
+  const isError = errors ? (
     <div className={styles.amHeader}>
       <Text theme={TextThemes.ERROR}>
-        {isLoading ? t("loading") : t("error")}
+        {isLoading ? t("loading") : authErrors[errors[0]]}
       </Text>
     </div>
   ) : (
